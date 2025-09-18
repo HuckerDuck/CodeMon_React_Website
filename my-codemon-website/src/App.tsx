@@ -11,6 +11,8 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    // Async betyder asynkront 
+    //    -> Dem hämtar inte allt samtidigt 
     async function fetchData() {
       try {
         // Testar att hämta all data
@@ -56,14 +58,19 @@ function App() {
         {error && <p>Error... vid hämtningen. Kom ej åt databasen</p>}
         {!loading && !error && CodeMon && (
           <>
+          {/* Hämtar en bild */}
             <img
+            // Hämtar en bild och baserad det på CodeMon namnet som den hämtat från databasen
               src={`/images/${CodeMon.name}.png`}
               onError={(e) => {
+                // Går bilden ej att få ut så kommer denna bild nedan att läggas ut
                 e.currentTarget.src = "/images/ErrorGettingImage.png"
               }}
               alt={CodeMon.name}
               className="codemon-image"
             />
+            {/* Vi hämtar CodeMon namn, typ, attackdmg och hp */}
+            {/* Går att lägga in när den blev skapad också  */}
             <h2 className="Codemon-Name">{CodeMon.name}</h2>
             <h2 className="Codemon-Type">{CodeMon.type}</h2>
             <h2 className="Codemon-CreatedAt">Attack Damage: {CodeMon.attackdmg}</h2>
